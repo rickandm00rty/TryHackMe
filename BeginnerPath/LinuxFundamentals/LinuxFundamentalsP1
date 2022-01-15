@@ -1,0 +1,27 @@
+Linux Fundamentals P1 | Kyle Nelson | 03.9.2021
+##
+
+Being brief, this section goes over typical Linux commands I believe I already knew, including ls, cd, ssh, moving up driectories with "..", and other basics. There may not be much content here but it served as a refresher for the following:
+
+
+Basic Syntax:
+--
+&& - Runs commands in sequence, relies on first command success
+
+; - Runs commands in sequence, but does not rely on first command success
+
+& - Runs command in background
+
+$ - Environment variables, just like an alias. Set using "export <variable>=<value>"
+
+Permissions:
+--
+chown - change ownership of file(user and group)
+
+chmod - change moderator of file(user and group)
+
+    [chmod] is set using a 3 tier number system ranging from 0-7 for each tier. Tier 1 is User Permissions, Tier 2 is Group permissions,     Tier 3 is everyone else. IE > chmod 777 means everyone accesses everything, 000 means no access. 
+
+Searching with FIND:
+--
+find <locationtosearchfrom> -name <name> -f 2>>/dev/null

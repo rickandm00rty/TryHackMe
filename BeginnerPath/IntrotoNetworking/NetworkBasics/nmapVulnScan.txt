@@ -1,0 +1,16 @@
+# Nmap 7.80 scan initiated Sat Mar 13 09:48:43 2021 as: nmap -sC -sV -P -oN nmapVulnScan.txt 10.10.251.112
+Nmap scan report for 10.10.251.112
+Host is up (0.18s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 54:b5:46:93:a1:e6:d6:f5:28:e2:e6:14:af:d0:50:7d (RSA)
+|   256 d0:b7:56:c9:11:a6:12:d7:2f:b9:ea:d7:61:23:de:72 (ECDSA)
+|_  256 36:55:8b:c6:36:d0:07:18:92:96:b5:4f:a1:9e:d2:f0 (ED25519)
+80/tcp open  http    Werkzeug httpd 0.14.1 (Python 3.6.9)
+|_http-title: XXE
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Mar 13 09:49:00 2021 -- 1 IP address (1 host up) scanned in 16.83 seconds

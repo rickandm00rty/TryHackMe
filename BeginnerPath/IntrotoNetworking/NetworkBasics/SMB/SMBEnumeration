@@ -1,0 +1,96 @@
+SMB/Samba Enumeration Practice | 03.33.2021 | Kyle Nelson
+=======
+Using Nmap, we scan for all ports on 10.10.140.141 with -A(version,OS,protocol) and -p(all ports) flags
+
+sudo nmap -A -p- 10.10.140.141 -o ./SMBScan1
+
+Also used Enum4Linux to provide more verbose information regarding specific SMB Shares
+
+Scanning the machine reveals the following NMAP and Enum4Linux Scans Respectively:
+
+=====
+NMAP:
+=====
+PORT    STATE SERVICE     VERSION                                                                                                                                                                                                                                                         
+22/tcp  open  ssh         OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)                                                                                                                                                                                                    
+| ssh-hostkey:                                                                                                                                                                                                                                                                            
+|   2048 91:df:5c:7c:26:22:6e:90:23:a7:7d:fa:5c:e1:c2:52 (RSA)                                                                                                                                                                                                                            
+|   256 86:57:f5:2a:f7:86:9c:cf:02:c1:ac:bc:34:90:6b:01 (ECDSA)                                                                                                                                                                                                                           
+|_  256 81:e3:cc:e7:c9:3c:75:d7:fb:e0:86:a0:01:41:77:81 (ED25519)                                                                                                                                                                                                                         
+139/tcp open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)                                                                                                                                                                                                                     
+445/tcp open  netbios-ssn Samba smbd 4.7.6-Ubuntu (workgroup: WORKGROUP)
+
+
+===========
+ENUM4LINUX:
+===========
+|    Target Information    |                                                                              ==========================                                                                                                                                                                                                                                                               
+Target ........... 10.10.140.141                                                                                                                                                                                                                                                          
+RID Range ........ 500-550,1000-1050                                                                                                                                                                                                                                                      
+Username ......... ''                                                                                                                                                                                                                                                                     
+Password ......... ''                                                                                                                                                                                                                                                                     
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                          
+ =====================================================                                                                                                                                                                                                                                    
+|    Enumerating Workgroup/Domain on 10.10.140.141    |                                                                                                                                                                                                                                   
+ =====================================================                                                                                                                                                                                                                                    
+[+] Got domain/workgroup name: WORKGROUP                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                          
+ =============================================                                                                                                                                                                                                                                            
+|    Nbtstat Information for 10.10.140.141    |                                                                                                                                                                                                                                           
+ =============================================                                                                                                                                                                                                                                            
+Looking up status of 10.10.140.141                                                                                                                                                                                                                                                        
+        POLOSMB         <00> -         B <ACTIVE>  Workstation Service                                                                                                                                                                                                                    
+        POLOSMB         <03> -         B <ACTIVE>  Messenger Service                                                                                                                                                                                                                      
+        POLOSMB         <20> -         B <ACTIVE>  File Server Service                                                                                                                                                                                                                    
+        ..__MSBROWSE__. <01> - <GROUP> B <ACTIVE>  Master Browser                                                                                                                                                                                                                         
+        WORKGROUP       <00> - <GROUP> B <ACTIVE>  Domain/Workgroup Name                                                                                                                                                                                                                  
+        WORKGROUP       <1d> -         B <ACTIVE>  Master Browser                                                                                                                                                                                                                         
+        WORKGROUP       <1e> - <GROUP> B <ACTIVE>  Browser Service Elections                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                          
+        MAC Address = 00-00-00-00-00-00                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                          
+ ======================================                                                                                                                                                                                                                                                   
+|    Session Check on 10.10.140.141    |                                                                                                                                                                                                                                                  
+ ======================================                                                                                                                                                                                                                                                   
+[+] Server 10.10.140.141 allows sessions using username '', password ''                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                          
+ ============================================                                                                                                                                                                                                                                             
+|    Getting domain SID for 10.10.140.141    |                                                                                                                                                                                                                                            
+ ============================================                                                                                                                                                                                                                                             
+Domain Name: WORKGROUP                                                                                                                                                                                                                                                                    
+Domain Sid: (NULL SID)                                                                                                                                                                                                                                                                    
+[+] Can't determine if host is part of domain or part of a workgroup                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                          
+ =======================================                                                                                                                                                                                                                                                  
+|    OS information on 10.10.140.141    |                                                                                                                                                                                                                                                 
+ =======================================                                                                                                                                                                                                                                                  
+Use of uninitialized value $os_info in concatenation (.) or string at enum4linux.pl line 464.                                                                                                                                                                                             
+[+] Got OS info for 10.10.140.141 from smbclient:                                                                                                                                                                                                                                         
+[+] Got OS info for 10.10.140.141 from srvinfo:                                                                                                                                                                                                                                           
+        POLOSMB        Wk Sv PrQ Unx NT SNT polosmb server (Samba, Ubuntu)                                                                                                                                                                                                                
+        platform_id     :       500                                                                                                                                                                                                                                                       
+        os version      :       6.1                                                                                                                                                                                                                                                       
+        server type     :       0x809a03                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                          
+ ==============================                                                                                                                                                                                                                                                           
+|    Users on 10.10.140.141    |                                                                                                                                                                                                                                                          
+ ==============================                                       
+Use of uninitialized value $users in print at enum4linux.pl line 876.
+Use of uninitialized value $users in pattern match (m//) at enum4linux.pl line 879.                                                          
+
+Use of uninitialized value $users in print at enum4linux.pl line 892.
+Use of uninitialized value $users in pattern match (m//) at enum4linux.pl line 894.                                                          
+
+ ========================================== 
+|    Share Enumeration on 10.10.140.141    |
+ ========================================== 
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        netlogon        Disk      Network Logon Service
+        profiles        Disk      Users profiles
+        print$          Disk      Printer Drivers
+
+

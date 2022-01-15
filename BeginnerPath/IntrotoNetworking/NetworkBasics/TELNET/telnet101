@@ -1,0 +1,5 @@
+TELNET Basics | Kyle Nelson | 04/07/2021
+========================================
+What is TelNet? - A communication protocol using TCP/IP connectivity standards to allow text-based communication between 2 machines. The communication is unencrypted and shown as blank text, but does allow for some interaction. TelNet is being replaced by its more secure brother, SSH. 
+
+

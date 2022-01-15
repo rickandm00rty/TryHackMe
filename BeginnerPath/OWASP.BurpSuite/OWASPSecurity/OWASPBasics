@@ -1,0 +1,20 @@
+OWASP & Command Injection Intro | Kyle Nelson | 03.12.2021
+===================
+
+This sections covers the basic types of vulnerabilities in Web applications and how one might attack those vectors. In laymens terms, the best way to attack a machine after enumerating is to navigate the fiule structure of the website and verify vulnerabilities with [Users, Protocol versions, Injecting Commands to Input Fields, Brute Forcing with Linux Tools, and generally finding as much data as possible from the website. One thing I learned in navigating the vulnerable IP related to this THM room is that finding this information can be done in many ways. Worry less about efficiency in the beginning, and simply try to find the data you want. There will always be a faster or more automated way of doing things but we only learn how these automated tools work by performing the work ourselves. 
+
+ 
+[Common Types of Attack Methods/Vulns]:
+Injection
+Broken Authentication
+Sensitive Data Exposure
+XML External Entity
+Broken Access Control
+Security Misconfiguration
+Cross-site Scripting
+Insecure Deserialization
+Components with Known Vulnerabilities
+Insufficent Logging & Monitoring
+
+
+

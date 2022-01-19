@@ -22,10 +22,10 @@ This allows for connection to specified ports, as well as sending data to those 
     ncat -p = port specification
     ncat -e = execute program on connect
 
-|gobuster|
+|gobuster| - Trash Application That Doesn't Work 
 ==========
+USE DIRSEARCH INSTEAD!!!!
 Scans for hidden directories and folders based on a wordlist of common directories
-
     
     |Standard Usage|
     ================
